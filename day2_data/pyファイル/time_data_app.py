@@ -2,6 +2,8 @@ from dataaccess import DataAccess
 import itertools
 
 hoge = DataAccess()
+count = 0
 x = list(itertools.chain.from_iterable(hoge.get_spots()))
-x.insert(0,"when_build:")
-print(x)
+for i in ["when_build:","open:","close:"]:
+    print(i,x[count])
+    count += 1
