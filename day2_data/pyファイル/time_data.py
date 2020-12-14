@@ -6,5 +6,4 @@ class DataAccess:
         data = ()
         db = DB(Var.hostname, Var.port, Var.dbname, Var.username, Var.password)
         return db.execute(query, data)
-
 print("動いてる1")
