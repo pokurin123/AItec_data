@@ -1,10 +1,11 @@
-from var import Var
-from db import DB
-class DataAccess:
-    def get_spots(self):
-        query = "SELECT when_build,open,close FROM my_spot4 WHERE ID = 1"
-        data = ()
-        db = DB(Var.hostname, Var.port, Var.dbname, Var.username, Var.password)
-        return db.execute(query, data)
+from pre_dataaccess import DataAccess
+import itertools
 
-print("動いてる1")
+for id_n in list(range(1,10)):
+    hoge = DataAccess()
+    x = list(itertools.chain.from_iterable(hoge.get_spots(id_n)))
+    x.insert(2,"close")
+    x.insert(1,"open")
+    x.insert(0,"when_build")
+
+    print(x)
