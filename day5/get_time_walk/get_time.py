@@ -22,7 +22,7 @@ for id_n in range(1,11):
     count += 1
 
 def make_dist(point_A,point_B):    
-    print(point_A + "から" + point_B + "までの距離")
+    print(point_A + "から" + point_B + "までの時間")
     #適当なidを取得
     for i in name:
         if name[i] == point_A:
@@ -47,7 +47,7 @@ def make_dist(point_A,point_B):
 
     final_dist = red_rad * (dist_sphere + dist_corr)
     time = final_dist/4 *60
-    print(str(time) + "km")
+    print(str(time) + "分")
 
 def set_point(point_A):
     for i in name:
@@ -59,5 +59,6 @@ def set_point(point_A):
         make_dist(point_A,point_B)
         print("----------------------------------")
 
+#地点を指定する事で、それ以外の地点との距離、時間を計測
 point_A = "武蔵国分寺"
 set_point(point_A)
