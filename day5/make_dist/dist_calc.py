@@ -29,18 +29,25 @@ def make_dist(point_A,point_B):
             id_A = i
         elif name[i] == point_B:
             id_B = i
+    
+    rad_lati_A = math.radians(list_latitude[id_A])
+    rad_long_A = math.radians(list_longitude[id_A])
+    rad_lati_B = math.radians(list_latitude[id_B])
+    rad_long_B = math.radians(list_longitude[id_B])
 
-    param_rati_A = math.atan(red_rad/pol_rad * math.tan(list_latitude[id_A]))
-    param_rati_B = math.atan(red_rad/pol_rad * math.tan(list_latitude[id_B]))
+    param_rati_A = math.atan(pol_rad/red_rad * math.tan(rad_lati_A))
+    param_rati_B = math.atan(pol_rad/red_rad * math.tan(rad_lati_B))
 
-    dist_sphere = math.acos(math.sin(param_rati_A) * math.sin(param_rati_B) + math.cos(param_rati_A) * math.cos(param_rati_B) * math.cos(list_longitude[id_A]-list_longitude[id_B]))
+    dist_sphere = math.acos(math.sin(param_rati_A) * math.sin(param_rati_B) + math.cos(param_rati_A) * math.cos(param_rati_B) * math.cos(rad_long_A - rad_long_B))
 
     corr_1 = (math.sin(dist_sphere)-dist_sphere) * (math.sin(param_rati_A)+math.sin(param_rati_B))**2 / math.cos(dist_sphere/2)**2
     corr_2 = (math.sin(dist_sphere)+dist_sphere) * (math.sin(param_rati_A)-math.sin(param_rati_B))**2 / math.cos(dist_sphere/2)**2
-    dist_corr = ((red_rad - pol_rad) / red_rad)/8 * (corr_1 - corr_2)
+    f = (red_rad - pol_rad) / red_rad
+    dist_corr = f/8 * (corr_1 - corr_2)
 
     final_dist = red_rad * (dist_sphere + dist_corr)
-    print(str(final_dist) + "メートル")
+    time = final_dist/4
+    print(str(final_dist) + "km")
 
 def set_point(point_A):
     for i in name:
@@ -52,6 +59,5 @@ def set_point(point_A):
         make_dist(point_A,point_B)
         print("----------------------------------")
 
-#point_Aに任意の値を入力
 point_A = "武蔵国分寺"
 set_point(point_A)
